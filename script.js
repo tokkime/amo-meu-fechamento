@@ -34,6 +34,30 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             audio.pause();
         }
+
+    
+        const videoContainers = document.querySelectorAll(".rounded-video");
+
+        videoContainers.forEach((container) => {
+            container.addEventListener("click", function () {
+                const fullscreenOverlay = document.createElement("div");
+                fullscreenOverlay.classList.add("fullscreen-overlay");
+    
+                const iframeClone = this.querySelector("iframe").cloneNode(true);
+                fullscreenOverlay.appendChild(iframeClone);
+    
+                const overlayContent = document.createElement("div");
+                overlayContent.classList.add("fullscreen-overlay-content");
+                overlayContent.innerHTML = "Click anywhere to close";
+                fullscreenOverlay.appendChild(overlayContent);
+    
+                fullscreenOverlay.addEventListener("click", function () {
+                    fullscreenOverlay.remove();
+                });
+    
+                document.body.appendChild(fullscreenOverlay);
+            });
+        });
     });
 });
 
